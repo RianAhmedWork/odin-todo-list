@@ -1,0 +1,1 @@
+It's a basic template for a webpack project
