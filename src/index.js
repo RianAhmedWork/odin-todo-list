@@ -14,7 +14,6 @@ class Project {
     }
 }
 
-
 // create a todo class which will have title, description, due date
 // priority, notes and checklist
 class Todo {
@@ -28,10 +27,14 @@ class Todo {
     }
 
     modifyCheckList() {
-        if (this.checklist === true) {
-            this.checklist = false;
-        } else {
-            this.checklist = true;
-        }
+        console.log(`before toggle: ${this.checklist}`);
+        this.checklist = !this.checklist;
+        console.log(`after toggle: ${this.checklist}`);
     }
 }
+
+const proj = new Project("Default");
+proj.addTodo(new Todo("a","b","c","d","e", false));
+console.log(proj.todos[0]);
+proj.todos[0].modifyCheckList();
+console.log(proj.todos[0]);
