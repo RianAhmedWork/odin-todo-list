@@ -1,3 +1,4 @@
+import "./styles.css"
 import { parse } from "date-fns";
 
 // create a project class under which our todos will be stored
@@ -46,4 +47,6 @@ class Todo {
 const proj = new Project("Default");
 const testDate = parse("2024-01-26", "yyyy-MM-dd", new Date());
 proj.addTodo(new Todo("Groceries","Buy groceries for the week", testDate,"d","e"));
-console.log(proj.todos[0].dueDate);
+console.log(proj.todos[0]);
+proj.todos[0].editTodo("Laundry", "Do laundry", parse("2025-05-20", "yyyy-MM-dd", new Date()), "High", "Wash all your clothes properly");
+console.log(proj.todos[0]);
