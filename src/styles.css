@@ -67,6 +67,42 @@ header, footer {
 .todo {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     border: 2px solid black;
     margin: 10px;
+}
+
+#project-modal {
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+#project-modal-content {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#todo-modal {
+    border: 2px solid black;
+}
+
+#todo-modal-content {
+    display: flex;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#todo-form {
+    display: flex;
+    gap: 5px;
+}
+
+dialog::backdrop {
+    opacity: .75;
 }

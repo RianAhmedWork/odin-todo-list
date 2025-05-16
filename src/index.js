@@ -2,6 +2,26 @@ import "./styles.css"
 import { parse } from "date-fns";
 import { Project, Todo} from "./objects.js"
 
+const addProject = document.getElementById("project-button");
+const projectModal = document.getElementById("project-modal");
+const projectClose = document.getElementById("project-close");
+addProject.addEventListener("click", () => {
+    projectModal.showModal();
+});
+projectClose.addEventListener("click", () => {
+    projectModal.close();
+});
+
+const todoModal = document.getElementById("todo-modal");
+const addTodo = document.getElementById("todo-button");
+const todoClose = document.getElementById("todo-close");
+addTodo.addEventListener("click", () => {
+    todoModal.showModal();
+});
+todoClose.addEventListener("click", () => {
+    todoModal.close();
+});
+
 
 
 const proj = new Project("Default");

@@ -13,26 +13,57 @@
     </header>
 
     <div id="main">
+        <dialog></dialog>
         <div id="sidebar">
             <div id="add-buttons">
-                <button>New Todo</button>
-                <button>New Project</button>
+                <button id="todo-button">New Todo</button>
+                <button id="project-button">New Project</button>
             </div>
             <div id="project-list">
                 <button>Default</button>
             </div>
         </div>
         <div id="main-content">
+            <dialog id="project-modal">
+                <div id="project-modal-content">
+                    <button id="project-close">Close</button>
+                    <form action="" method="get" id="project-form">
+                        <label for="project-name">Name: </label>
+                        <input type="text" name="project-name" id="project-name" required />
+                        <input type="submit" id="project-submit">
+                    </form>
+                </div>
+            </dialog>
+            <dialog id="todo-modal">
+                <div id="todo-modal-content">
+                    <button id="todo-close">Close</button>
+                    <form action="get" id="todo-form">
+                        <label for="todo-name">Name:</label>
+                        <input type="text" name="todo-name" id="todo-name" required />
+                        <label for="todo-description">Description:</label>
+                        <input type="text" name="todo-description" id="todo-description" required />
+                        <label for="todo-due">Due Date:</label>
+                        <input type="date" name="todo-due" id="todo-due" required />
+                        <label for="todo-priority">Priority:</label>
+                        <select name="todo-priority" id="todo-priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </form>
+                </div>
+            </dialog>
             <div id="content-heading">
                 <h1>Default</h1>
                 <button id="project-delete">delete project</button>
             </div>
             <div id="todo-list">
                 <div class="todo">
-                    Groceries Due: 11/11/2023
+                    <p>Groceries</p>
+                    <p>Due: 20/11/2024</p>
                     <div>
-                    <input type="checkbox" name="0" id="0" value="true">
-                    <label for="0">Completed</label>
+                        <input type="checkbox" name="0" id="0" value="true">
+                        <label for="0">Completed</label>
                     </div>
                     <button>edit/view</button>
                     <button>delete</button>
