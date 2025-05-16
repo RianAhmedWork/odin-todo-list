@@ -15,6 +15,10 @@ class Project {
             throw new Error("Only Todo instances can be added");
         }
     }
+
+    removeTodo(index) {
+        this.todos.splice(index, 1);
+    }
 }
 
 // create a todo class which will have title, description, due date
@@ -30,9 +34,7 @@ class Todo {
     }
 
     modifyCheckList() {
-        console.log(`before toggle: ${this.checklist}`);
         this.checklist = !this.checklist;
-        console.log(`after toggle: ${this.checklist}`);
     }
 
     editTodo(newTitle, newDescription, newDueDate, newPriority, newNotes) {
