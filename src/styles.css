@@ -41,6 +41,7 @@ header, footer {
     flex-direction: column;
     justify-content: flex-start;
     padding-top: 10px;
+    gap: 5px;
 }
 
 #main-content {
@@ -100,7 +101,16 @@ header, footer {
 
 #todo-form {
     display: flex;
+    flex-direction: column;
     gap: 5px;
+    justify-content: center;
+}
+
+#todo-form > div {
+display: flex;
+flex-direction: column;
+gap: 5px;
+justify-content: center;
 }
 
 dialog::backdrop {

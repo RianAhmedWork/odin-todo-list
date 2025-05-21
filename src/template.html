@@ -20,7 +20,7 @@
                 <button id="project-button">New Project</button>
             </div>
             <div id="project-list">
-                <button>Default</button>
+                <button class="project-buttons">Default</button>
             </div>
         </div>
         <div id="main-content">
@@ -38,18 +38,28 @@
                 <div id="todo-modal-content">
                     <button id="todo-close">Close</button>
                     <form action="get" id="todo-form">
+                        <div>
                         <label for="todo-name">Name:</label>
                         <input type="text" name="todo-name" id="todo-name" required />
+                        </div>
+                        <div>
                         <label for="todo-description">Description:</label>
-                        <input type="text" name="todo-description" id="todo-description" required />
+                        <textarea name="todo-description" id="todo-description" rows="4" cols="50" required></textarea>
+                        </div>
+                        <!-- <input type="text" name="todo-description" id="todo-description" required /> -->
+                         <div>
                         <label for="todo-due">Due Date:</label>
                         <input type="date" name="todo-due" id="todo-due" required />
+                        </div>
+                        <div>
                         <label for="todo-priority">Priority:</label>
                         <select name="todo-priority" id="todo-priority">
                             <option value="low">Low</option>
                             <option value="medium">Medium</option>
                             <option value="high">High</option>
                         </select>
+                        </div>
+                        <input type="submit" id="todo-submit">
                     </form>
                 </div>
             </dialog>

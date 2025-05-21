@@ -24,12 +24,11 @@ class Project {
 // create a todo class which will have title, description, due date
 // priority, notes and checklist
 class Todo {
-    constructor(title, description, dueDate, priority, notes) {
+    constructor(title, description, dueDate, priority) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.notes = notes;
         this.checklist = false;
     }
 
@@ -37,11 +36,10 @@ class Todo {
         this.checklist = !this.checklist;
     }
 
-    editTodo(newTitle, newDescription, newDueDate, newPriority, newNotes) {
+    editTodo(newTitle, newDescription, newDueDate, newPriority) {
         this.title = newTitle;
         this.description = newDescription;
         this.dueDate = newDueDate;
         this.priority = newPriority;
-        this.notes = newNotes;
     }
 }
