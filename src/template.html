@@ -20,49 +20,49 @@
                 <button id="project-button">New Project</button>
             </div>
             <div id="project-list">
- 
+
             </div>
         </div>
-        <div id="main-content">
-            <dialog id="project-modal">
-                <div id="project-modal-content">
-                    <button id="project-close">Close</button>
-                    <form action="" method="get" id="project-form">
-                        <label for="project-name">Name: </label>
-                        <input type="text" name="project-name" id="project-name" required />
-                        <input type="submit" id="project-submit">
-                    </form>
-                </div>
-            </dialog>
-            <dialog id="todo-modal">
-                <div id="todo-modal-content">
-                    <button id="todo-close">Close</button>
-                    <form action="get" id="todo-form">
-                        <div>
+        <dialog id="project-modal">
+            <div id="project-modal-content">
+                <button id="project-close">Close</button>
+                <form action="" method="get" id="project-form">
+                    <label for="project-name">Name: </label>
+                    <input type="text" name="project-name" id="project-name" required />
+                    <input type="submit" id="project-submit">
+                </form>
+            </div>
+        </dialog>
+        <dialog id="todo-modal">
+            <div id="todo-modal-content">
+                <button id="todo-close">Close</button>
+                <form action="get" id="todo-form">
+                    <div>
                         <label for="todo-name">Name:</label>
                         <input type="text" name="todo-name" id="todo-name" required />
-                        </div>
-                        <div>
+                    </div>
+                    <div>
                         <label for="todo-description">Description:</label>
                         <textarea name="todo-description" id="todo-description" rows="4" cols="50" required></textarea>
-                        </div>
-                        <!-- <input type="text" name="todo-description" id="todo-description" required /> -->
-                         <div>
+                    </div>
+                    <!-- <input type="text" name="todo-description" id="todo-description" required /> -->
+                    <div>
                         <label for="todo-due">Due Date:</label>
                         <input type="date" name="todo-due" id="todo-due" required />
-                        </div>
-                        <div>
+                    </div>
+                    <div>
                         <label for="todo-priority">Priority:</label>
                         <select name="todo-priority" id="todo-priority">
                             <option value="low">Low</option>
                             <option value="medium">Medium</option>
                             <option value="high">High</option>
                         </select>
-                        </div>
-                        <input type="submit" id="todo-submit">
-                    </form>
-                </div>
-            </dialog>
+                    </div>
+                    <input type="submit" id="todo-submit">
+                </form>
+            </div>
+        </dialog>
+        <div id="main-content">
             <div id="content-heading">
                 <h1>Default</h1>
                 <button id="project-delete">delete project</button>
