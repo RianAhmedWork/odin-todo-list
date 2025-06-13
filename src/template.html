@@ -13,7 +13,6 @@
     </header>
 
     <div id="main">
-        <dialog></dialog>
         <div id="sidebar">
             <div id="add-buttons">
                 <button id="todo-button" data-project="">New Todo</button>
@@ -59,6 +58,35 @@
                         </select>
                     </div>
                     <input type="submit" id="todo-submit">
+                </form>
+            </div>
+        </dialog>
+        <dialog id="edit-modal">
+            <div id="edit-modal-content">
+                <button id="edit-close">Close</button>
+                <form action="get" id="edit-form">
+                    <div>
+                        <label for="edit-name">Name:</label>
+                        <input type="text" name="edit-name" id="edit-name" required />
+                    </div>
+                    <div>
+                        <label for="edit-description">Description:</label>
+                        <textarea name="edit-description" id="edit-description" rows="4" cols="50" required></textarea>
+                    </div>
+                    <!-- <input type="text" name="todo-description" id="todo-description" required /> -->
+                    <div>
+                        <label for="edit-due">Due Date:</label>
+                        <input type="date" name="edit-due" id="edit-due" required />
+                    </div>
+                    <div>
+                        <label for="edit-priority">Priority:</label>
+                        <select name="edit-priority" id="edit-priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <input type="submit" id="edit-submit">
                 </form>
             </div>
         </dialog>

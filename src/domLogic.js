@@ -21,12 +21,22 @@ function addNewProject() {
 
   modalSubmit.addEventListener("click", (event) => {
     event.preventDefault();
-    if (projectForm.checkValidity()) {
-      projectModal.close();
-
-      const newProject = new Project(
-        document.getElementById("project-name").value
+    const projectName = document.getElementById("project-name");
+    const projectButtons = document.querySelectorAll(".project-buttons");
+    if (!projectForm.checkValidity()) {
+      alert("Please fill out the project form properly");
+    } else if (
+      projectButtons &&
+      Array.from(projectButtons).some(
+        (item) => item.id === projectName.value.toLowerCase()
+      )
+    ) {
+      alert(
+        "A project with that name already exists, please choose another name"
       );
+    } else {
+      projectModal.close();
+      const newProject = new Project(projectName.value.toLowerCase());
       newProject.todos.push(
         new Todo("Ligma", "This is something", "2025-01-01", "low")
       );
@@ -34,14 +44,14 @@ function addNewProject() {
       const newProjectButton = document.createElement("button");
 
       newProjectButton.classList = "project-buttons";
-      newProjectButton.textContent = newProject.name;
-      newProjectButton.dataset.name = newProject.name;
+      newProjectButton.textContent = projectName.value;
+      newProjectButton.id = newProject.name;
 
       newProjectButton.addEventListener("click", () => {
         if (addTodoButton.dataset.project !== newProject.name) {
           addTodoButton.dataset.project = newProject.name;
-          displayProject(newProject.name, newProjectButton, addTodoButton);
         }
+        displayProject(newProject.name, newProjectButton, addTodoButton);
       });
 
       projectList.append(newProjectButton);
@@ -50,8 +60,6 @@ function addNewProject() {
         JSON.parse(localStorage.getItem(newProject.name))
       );
       console.log(test.todos[0].dueDate);
-    } else {
-      alert("please fill out the project form properly");
     }
   });
 }
@@ -81,6 +89,7 @@ function addNewTodo() {
 
   modalSubmit.addEventListener("click", (event) => {
     event.preventDefault();
+    todoModal.close();
     if (todoForm.checkValidity()) {
       const retrievedProject = localStorage.getItem(
         addTodoButton.dataset.project
@@ -90,9 +99,20 @@ function addNewTodo() {
       revivedProject.todos.forEach((item, index, array) => {
         array[index] = Object.assign(new Todo(), item);
       });
-      revivedProject.addTodo(todoName.value, todoDescription.value, todoDue.value, todoPriority.value);
+      revivedProject.addTodo(
+        new Todo(
+          todoName.value,
+          todoDescription.value,
+          todoDue.value,
+          todoPriority.value
+        )
+      );
       localStorage.setItem(revivedProject.name, JSON.stringify(revivedProject));
-      displayProject(revivedProject.name, )
+      displayProject(
+        revivedProject.name,
+        document.getElementById(revivedProject.name),
+        addTodoButton
+      );
       console.log(revivedProject instanceof Project);
       console.log(revivedProject.todos[0] instanceof Todo);
       // revivedProject.addTodo(new Todo(todoName.value, todoDescription.value, todoDue.value, todoPriority.value));
@@ -106,13 +126,42 @@ function addNewTodo() {
   });
 }
 
+function EditTodo(title, description, dueDate, priority) {
+  const editModal = document.getElementById("edit-modal");
+  const editForm = document.getElementById("edit-form");
+  const modalCloseButton = document.getElementById("edit-close");
+  const editSubmit = document.getElementById("edit-submit");
+  const editName = document.getElementById("edit-name");
+  const editDescription = document.getElementById("edit-description");
+  const editDue = document.getElementById("edit-due");
+  const editPriority = document.getElementById("edit-priority");
+
+  editName.value = title;
+  editDescription.value = description;
+  editDue.value = dueDate;
+  editPriority.value = priority;
+  editModal.showModal();
+
+  modalCloseButton.addEventListener("click", () => {
+    editModal.close();
+  });
+
+  editSubmit.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (editForm.checkValidity()) {
+    } else {
+      alert("Please fill out the todo form properly");
+    }
+  });
+}
+
 function displayProject(projectName, projectButton, todoButton) {
   const retrivedProject = JSON.parse(localStorage.getItem(projectName));
   const revivedProject = Object.assign(new Project(), retrivedProject);
   const mainContent = document.getElementById("main-content");
   mainContent.innerHTML = "";
   const projectTitle = document.createElement("h1");
-  projectTitle.textContent = projectName;
+  projectTitle.textContent = projectButton.textContent;
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete Project";
   const contentHeading = document.createElement("div");
@@ -144,6 +193,13 @@ function displayProject(projectName, projectButton, todoButton) {
     editButton.textContent = "Edit/View";
     const deleteTodoButton = document.createElement("button");
     deleteTodoButton.textContent = "Delete";
+    deleteTodoButton.addEventListener("click", () => {
+      revivedProject.removeTodo(index);
+      todoDiv.remove();
+    });
+    editButton.addEventListener("click", () => {
+      EditTodo(item.title, item.description, item.dueDate, item.priority);
+    });
     todoDiv.append(
       groceries,
       dueDate,

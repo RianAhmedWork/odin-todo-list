@@ -90,7 +90,7 @@ header, footer {
     border: 2px solid black;
 }
 
-#todo-modal-content {
+#todo-modal-content,#edit-modal-content {
     display: flex;
     gap: 10px;
     display: flex;
@@ -99,14 +99,14 @@ header, footer {
     align-items: flex-end;
 }
 
-#todo-form {
+#todo-form,#edit-form {
     display: flex;
     flex-direction: column;
     gap: 5px;
     justify-content: center;
 }
 
-#todo-form > div {
+#todo-form > div,#edit-form > div {
 display: flex;
 flex-direction: column;
 gap: 5px;
