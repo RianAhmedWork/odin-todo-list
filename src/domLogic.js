@@ -1,6 +1,28 @@
 import { parse } from "date-fns";
 import { Project, Todo } from "./objects.js";
-export { addNewProject, addNewTodo };
+export { addNewProject, addNewTodo, createDefaultProject };
+
+function createDefaultProject() {
+  const projectButtons = document.querySelectorAll(".project-buttons");
+  const projectList = document.getElementById("project-list")
+  if (!projectButtons || !Array.from(projectButtons).some(item => item.id === "default")) {
+    const newProject = new Project("default");
+    const addTodoButton = document.getElementById("todo-button");
+    localStorage.setItem(newProject.name, JSON.stringify(newProject));
+    const newProjectButton = document.createElement("button");
+    newProjectButton.classList = "project-buttons";
+    newProjectButton.textContent = "Default";
+    newProjectButton.id = newProject.name;
+
+    newProjectButton.addEventListener("click", () => {
+      if(addTodoButton.dataset.project !== newProject.name) {
+        addTodoButton.dataset.project = newProject.name;
+      }
+      displayProject(newProject.name, newProjectButton, addTodoButton);
+    });
+    projectList.append(newProjectButton);
+  }
+}
 
 function addNewProject() {
   const addProjectButton = document.getElementById("project-button");
@@ -126,7 +148,7 @@ function addNewTodo() {
   });
 }
 
-function EditTodo(title, description, dueDate, priority) {
+function EditTodo(title, description, dueDate, priority, todo, projectName, projectButton, todoButton, project) {
   const editModal = document.getElementById("edit-modal");
   const editForm = document.getElementById("edit-form");
   const modalCloseButton = document.getElementById("edit-close");
@@ -140,6 +162,7 @@ function EditTodo(title, description, dueDate, priority) {
   editDescription.value = description;
   editDue.value = dueDate;
   editPriority.value = priority;
+
   editModal.showModal();
 
   modalCloseButton.addEventListener("click", () => {
@@ -149,6 +172,10 @@ function EditTodo(title, description, dueDate, priority) {
   editSubmit.addEventListener("click", (event) => {
     event.preventDefault();
     if (editForm.checkValidity()) {
+      editModal.close();
+      todo.editTodo(editName.value, editDescription.value, editDue.value, editPriority.value);
+      localStorage.setItem(projectName, JSON.stringify(project));
+      displayProject(projectName, projectButton, todoButton);
     } else {
       alert("Please fill out the todo form properly");
     }
@@ -185,6 +212,14 @@ function displayProject(projectName, projectButton, todoButton) {
     checkbox.name = "" + index;
     checkbox.id = "" + index;
     checkbox.value = "true";
+    checkbox.addEventListener("click", () => {
+      if (checkbox.checked) {
+        array[index].checklist = true;
+      } else {
+        array[index].checklist = false;
+      }
+      localStorage.setItem(revivedProject.name, JSON.stringify(revivedProject));
+    });
     const checkboxLabel = document.createElement("label");
     checkboxLabel.htmlFor = "" + index;
     checkboxLabel.textContent = "Completed";
@@ -195,10 +230,11 @@ function displayProject(projectName, projectButton, todoButton) {
     deleteTodoButton.textContent = "Delete";
     deleteTodoButton.addEventListener("click", () => {
       revivedProject.removeTodo(index);
+      localStorage.setItem(revivedProject.name, JSON.stringify(revivedProject));
       todoDiv.remove();
     });
     editButton.addEventListener("click", () => {
-      EditTodo(item.title, item.description, item.dueDate, item.priority);
+      EditTodo(item.title, item.description, item.dueDate, item.priority, array[index], projectName, projectButton, todoButton, revivedProject);
     });
     todoDiv.append(
       groceries,
@@ -210,10 +246,17 @@ function displayProject(projectName, projectButton, todoButton) {
     todoList.append(todoDiv);
   });
   deleteButton.addEventListener("click", () => {
+    if (projectName !== "default") {
     localStorage.removeItem(projectName);
     projectButton.remove();
     todoButton.dataset.project = "";
     mainContent.innerHTML = "";
+    const emptyContent = document.createElement("h1");
+    emptyContent.textContent = "Please Select A Project";
+    mainContent.append(emptyContent);
+    } else {
+      alert("The Default project cannot be deleted");
+    }
   });
   mainContent.append(contentHeading, todoList);
 }

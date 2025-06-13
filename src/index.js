@@ -1,10 +1,11 @@
 import "./styles.css"
 import { parse } from "date-fns";
 import { Project, Todo} from "./objects.js"
-import { addNewProject, addNewTodo } from "./domLogic.js";
+import { addNewProject, addNewTodo, createDefaultProject } from "./domLogic.js";
 
 addNewProject();
 addNewTodo();
+createDefaultProject();
 
 // const todoModal = document.getElementById("todo-modal");
 // const addTodo = document.getElementById("todo-button");

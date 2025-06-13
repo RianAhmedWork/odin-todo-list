@@ -32,10 +32,6 @@ class Todo {
         this.checklist = false;
     }
 
-    modifyCheckList() {
-        this.checklist = !this.checklist;
-    }
-
     editTodo(newTitle, newDescription, newDueDate, newPriority) {
         this.title = newTitle;
         this.description = newDescription;
